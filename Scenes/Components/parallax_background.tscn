@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dufl0fp7tns8j"]
+
+[ext_resource type="Texture2D" uid="uid://hu0o0t4v257" path="res://Assets/Sprites/Backgrounds/Desert/cethiel-desert-edit-small-swm-version-layer1.png" id="1_4oypm"]
+[ext_resource type="Script" uid="uid://ccxpdwxvmcdi3" path="res://Scripts/Components/ParallaxBackground.cs" id="1_mcq8x"]
+[ext_resource type="Texture2D" uid="uid://cctfmofgn8m4f" path="res://Assets/Sprites/Backgrounds/Desert/cethiel-desert-edit-small-swm-version-layer3.png" id="3_x0t86"]
+[ext_resource type="Texture2D" uid="uid://gco6j3f54uqs" path="res://Assets/Sprites/Backgrounds/Desert/cethiel-desert-edit-small-swm-version-layer2.png" id="4_2su27"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+follow_viewport_enabled = true
+script = ExtResource("1_mcq8x")
+Layers = Dictionary[Texture2D, float]({
+ExtResource("1_4oypm"): -1000.0,
+ExtResource("3_x0t86"): -990.0,
+ExtResource("4_2su27"): 0.0
+})
+SpriteSpawnPosition = Vector2(0, 380)
+BaseMotionScale = 0.001

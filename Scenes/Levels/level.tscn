@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://ba4crtph3hia3"]
+
+[ext_resource type="Script" uid="uid://dvmsy0salh7m0" path="res://Scripts/Levels/Level.cs" id="1_f1n8c"]
+[ext_resource type="PackedScene" uid="uid://dufl0fp7tns8j" path="res://Scenes/Components/parallax_background.tscn" id="2_7x7pb"]
+[ext_resource type="PackedScene" uid="uid://d0kwi1x3qcr34" path="res://Scenes/Components/controller.tscn" id="3_tq1so"]
+[ext_resource type="PackedScene" uid="uid://hdlp2pccyjsa" path="res://Scenes/Entities/player.tscn" id="4_rv5g2"]
+[ext_resource type="PackedScene" uid="uid://di7jdqbo58ygh" path="res://Scenes/UI/hud.tscn" id="5_lhx7y"]
+[ext_resource type="AudioStream" uid="uid://cjfn24uyujiac" path="res://Assets/Audio/Music/MainRandomizer.tres" id="6_rv5g2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tq1so"]
+size = Vector2(43285, 495)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_f1n8c")
+
+[node name="ParallaxBackground" parent="." node_paths=PackedStringArray("TrackedPlayer") instance=ExtResource("2_7x7pb")]
+TrackedPlayer = NodePath("")
+SpriteSpawnPosition = Vector2(0, 180)
+
+[node name="Controller" parent="." instance=ExtResource("3_tq1so")]
+
+[node name="Player" parent="Controller" instance=ExtResource("4_rv5g2")]
+position = Vector2(21, 599)
+scale = Vector2(2, 2)
+Type = 0
+
+[node name="Hud" parent="Controller/Player" instance=ExtResource("5_lhx7y")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -314.5
+offset_top = -236.0
+offset_right = -314.5
+offset_bottom = -236.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1369.5, 896.5)
+shape = SubResource("RectangleShape2D_tq1so")
+
+[node name="GameSoundtrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_rv5g2")
+autoplay = true

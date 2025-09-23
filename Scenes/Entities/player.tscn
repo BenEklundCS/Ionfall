@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://hdlp2pccyjsa"]
+
+[ext_resource type="Script" uid="uid://4ceg8kq3e0jh" path="res://Scripts/Entities/Player.cs" id="1_blnjl"]
+[ext_resource type="PackedScene" uid="uid://brg3naay62pbi" path="res://Scenes/Entities/ally.tscn" id="1_qbyki"]
+[ext_resource type="SpriteFrames" uid="uid://cf8m3hxflil1i" path="res://Assets/Sprites/Generated/char_frames.tres" id="2_nqm6o"]
+[ext_resource type="AudioStream" uid="uid://dt7v4hlt34yld" path="res://Assets/Audio/SFX/Space/laser1.mp3" id="4_svftf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbyki"]
+size = Vector2(22, 33)
+
+[node name="Player" instance=ExtResource("1_qbyki")]
+script = ExtResource("1_blnjl")
+JumpForce = 500
+CrouchBulletSpawnYOffset = -15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_qbyki")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = ExtResource("2_nqm6o")
+animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+[node name="ShootSound" parent="." index="4"]
+stream = ExtResource("4_svftf")

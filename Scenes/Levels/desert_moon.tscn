@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbiggxrhenq1w"]
+
+[ext_resource type="PackedScene" uid="uid://ba4crtph3hia3" path="res://Scenes/Levels/level.tscn" id="1_oqg8r"]
+[ext_resource type="PackedScene" uid="uid://b00h7mfjbbg6u" path="res://Scenes/Entities/mini_mech.tscn" id="2_isu7a"]
+
+[node name="DesertMoon" instance=ExtResource("1_oqg8r")]
+
+[node name="MiniMech" parent="." index="0" instance=ExtResource("2_isu7a")]
+position = Vector2(472, 582)
+scale = Vector2(2, 2)

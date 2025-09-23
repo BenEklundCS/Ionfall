@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4wyl23fcnbte"]
+
+[ext_resource type="Script" uid="uid://dmiai7tvtgxwf" path="res://Scripts/Entities/Character.cs" id="1_mqged"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqged"]
+
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_mqged")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mqged")
+
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]

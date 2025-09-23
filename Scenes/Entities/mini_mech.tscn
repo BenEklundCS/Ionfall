@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=3 uid="uid://b00h7mfjbbg6u"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_wyqqp"]
+[ext_resource type="Script" uid="uid://8a326ixdnqy4" path="res://Scripts/Entities/MiniMech.cs" id="2_0mdo6"]
+[ext_resource type="Texture2D" uid="uid://b0igynpb6tmpq" path="res://Assets/Sprites/Enemies/enemies-16col-sheet-alpha.png" id="2_yjfvd"]
+[ext_resource type="AudioStream" uid="uid://c450ptucnpe22" path="res://Assets/Audio/SFX/Space/laser2.mp3" id="4_0mdo6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5ux2"]
+size = Vector2(25.75, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mdo6"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(0, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm6hi"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(26, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwyut"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(52, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqh7o"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(78, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phvm6"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(104, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfw13"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(130, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62nfl"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(156, 0, 25, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7yhd"]
+atlas = ExtResource("2_yjfvd")
+region = Rect2(182, 0, 25, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjfvd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mdo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm6hi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwyut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqh7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phvm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfw13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62nfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7yhd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MiniMech" instance=ExtResource("1_wyqqp")]
+script = ExtResource("2_0mdo6")
+SightRange = 800.0
+Closeness = 200.0
+Speed = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0.875, 0.5)
+shape = SubResource("RectangleShape2D_x5ux2")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_yjfvd")
+frame_progress = 0.575865
+
+[node name="ShootTimer" type="Timer" parent="." index="3"]
+autostart = true
+
+[node name="ShootSound" parent="." index="4"]
+stream = ExtResource("4_0mdo6")

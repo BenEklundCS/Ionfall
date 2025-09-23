@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://di7jdqbo58ygh"]
+
+[ext_resource type="Script" uid="uid://banc0smb4tbo8" path="res://Scripts/UI/Hud.cs" id="1_sprlj"]
+[ext_resource type="FontFile" uid="uid://ctgnclojfllbk" path="res://Assets/Fonts/Bitty.ttf" id="2_ny26j"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sprlj")
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 0
+offset_right = 219.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("2_ny26j")
+theme_override_font_sizes/font_size = 128
+text = "0
+"
