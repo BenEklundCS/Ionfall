@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxov5n7jxv6o1"]
+
+[ext_resource type="Script" uid="uid://dpbhfti4wixrb" path="res://Scripts/Components/BulletFactory.cs" id="1_0dmg4"]
+[ext_resource type="Texture2D" uid="uid://br83lh7hchvxm" path="res://Assets/Sprites/Effects/projectiles-sheet-alpha.png" id="2_26xhl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0gja"]
+atlas = ExtResource("2_26xhl")
+region = Rect2(0.161236, -0.0278111, 17.6809, 18.3161)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26xhl"]
+atlas = ExtResource("2_26xhl")
+region = Rect2(-0.271801, 153.729, 18.2426, 18.2426)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq6ld"]
+atlas = ExtResource("2_26xhl")
+region = Rect2(0.0152283, 45.8276, 29.8566, 28.058)
+
+[node name="BulletFactory" type="Node2D"]
+script = ExtResource("1_0dmg4")
+BulletTextures = Dictionary[String, Texture2D]({
+"blue": SubResource("AtlasTexture_t0gja"),
+"green": SubResource("AtlasTexture_pq6ld"),
+"red": SubResource("AtlasTexture_26xhl")
+})

@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://pknus804tqp5"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_njmuc"]
+[ext_resource type="Script" uid="uid://drsrq1lr3jjbv" path="res://Scripts/Entities/MegaMech.cs" id="2_ekml0"]
+[ext_resource type="Texture2D" uid="uid://bs7exxg6xocx" path="res://Assets/Sprites/Enemies/enemies2-sheet-alpha-nosize.png" id="2_n4gbc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekml0"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(0, 0, 54, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cerh0"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(54, 0, 54, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h72kh"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(108, 0, 54, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byf2g"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(162, 0, 54, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqy8u"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(216, 0, 54, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y67j1"]
+atlas = ExtResource("2_n4gbc")
+region = Rect2(270, 0, 54, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyq1a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekml0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cerh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h72kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byf2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqy8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y67j1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekml0"]
+size = Vector2(51, 56)
+
+[node name="MegaMech" instance=ExtResource("1_njmuc")]
+scale = Vector2(2, 2)
+script = ExtResource("2_ekml0")
+SightRange = 1000.0
+Type = 2
+Speed = 100
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_dyq1a")
+frame_progress = 0.369075
+
+[node name="Gun" parent="." index="2"]
+Target = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_ekml0")
+
+[node name="ShootTimer" type="Timer" parent="." index="4"]
+autostart = true

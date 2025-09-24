@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmbhk85kxcpfw"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_0witb"]
+[ext_resource type="Script" uid="uid://ckvp27kbdv08e" path="res://Scripts/Entities/Demon.cs" id="2_4y0qm"]
+[ext_resource type="Texture2D" uid="uid://bs7exxg6xocx" path="res://Assets/Sprites/Enemies/enemies2-sheet-alpha-nosize.png" id="2_hwrm3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y0qm"]
+atlas = ExtResource("2_hwrm3")
+region = Rect2(0, 370, 90, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24fo7"]
+atlas = ExtResource("2_hwrm3")
+region = Rect2(90, 370, 90, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpo24"]
+atlas = ExtResource("2_hwrm3")
+region = Rect2(180, 370, 90, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4g1q"]
+atlas = ExtResource("2_hwrm3")
+region = Rect2(270, 370, 90, 53)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_omrr0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y0qm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24fo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpo24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4g1q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwrm3"]
+size = Vector2(93, 51)
+
+[node name="Demon" instance=ExtResource("1_0witb")]
+script = ExtResource("2_4y0qm")
+SightRange = 1000.0
+GravityEnabled = false
+Type = 2
+Speed = 200
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_omrr0")
+frame_progress = 0.523557
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_hwrm3")

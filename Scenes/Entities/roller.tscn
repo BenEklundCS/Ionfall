@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1wgk2pcea4o0"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_i1kex"]
+[ext_resource type="Script" uid="uid://dntuy5css2rju" path="res://Scripts/Entities/Roller.cs" id="2_ftjx2"]
+[ext_resource type="Texture2D" uid="uid://bs7exxg6xocx" path="res://Assets/Sprites/Enemies/enemies2-sheet-alpha-nosize.png" id="3_d6hhk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6nid"]
+atlas = ExtResource("3_d6hhk")
+region = Rect2(0, 437, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh2gx"]
+atlas = ExtResource("3_d6hhk")
+region = Rect2(32, 437, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b304j"]
+atlas = ExtResource("3_d6hhk")
+region = Rect2(64, 437, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grlpc"]
+atlas = ExtResource("3_d6hhk")
+region = Rect2(96, 437, 32, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkkd5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6nid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh2gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b304j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grlpc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1kex"]
+size = Vector2(30, 28)
+
+[node name="Roller" instance=ExtResource("1_i1kex")]
+script = ExtResource("2_ftjx2")
+SightRange = 1500.0
+Type = 2
+Speed = 200
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_mkkd5")
+frame_progress = 0.155305
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_i1kex")
