@@ -10,12 +10,11 @@
 [node name="Player" parent="Controller" index="0"]
 Type = 1
 
-[node name="MegaMech" parent="." index="5" instance=ExtResource("3_tbewl")]
-position = Vector2(806, 530)
-scale = Vector2(4, 4)
+[node name="Roller" parent="." index="5" instance=ExtResource("4_xh3h7")]
+position = Vector2(430, 523)
 
 [node name="Demon" parent="." index="6" instance=ExtResource("3_xh3h7")]
-position = Vector2(358, 439)
+position = Vector2(251, 458)
 
-[node name="Roller" parent="." index="7" instance=ExtResource("4_xh3h7")]
-position = Vector2(430, 523)
+[node name="MegaMech" parent="Demon" index="4" instance=ExtResource("3_tbewl")]
+position = Vector2(350, 131)

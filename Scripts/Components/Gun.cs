@@ -95,7 +95,7 @@ public partial class Gun : Node2D, IGun {
     }
 
     public void BeginReload() {
-        if (!_reloadTimer.IsStopped()) return;
+        if (!_reloadTimer.IsStopped() || _magazine == MagazineCapacity) return;
         _reloadTimer.Start();
         _reloading = true;
     }

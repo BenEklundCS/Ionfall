@@ -39,7 +39,7 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
 
     private void OnBodyEntered(Node2D body) {
         if (body is not Character character || !IsTarget(character)) return;
-        character.OnHit(this);
+        character.OnHit(Damage);
         QueueFree();
     }
 

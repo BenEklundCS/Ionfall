@@ -70,8 +70,8 @@ public abstract partial class Character : CharacterBody2D, IHittable {
         MoveAndSlide();
     }
     
-    public void OnHit(Bullet bullet) {
-        Health -= bullet.Damage;
+    public void OnHit(int damage) {
+        Health -= damage;
         if (_flashTimer.IsStopped()) _flashTimer.Start();
     }
     

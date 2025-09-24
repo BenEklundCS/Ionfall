@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1wgk2pcea4o0"]
+[gd_scene load_steps=11 format=3 uid="uid://c1wgk2pcea4o0"]
 
 [ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_i1kex"]
 [ext_resource type="Script" uid="uid://dntuy5css2rju" path="res://Scripts/Entities/Roller.cs" id="2_ftjx2"]
@@ -41,9 +41,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1kex"]
-size = Vector2(30, 28)
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftjx2"]
+size = Vector2(30, 30)
 
 [node name="Roller" instance=ExtResource("1_i1kex")]
+scale = Vector2(2, 2)
 script = ExtResource("2_ftjx2")
 SightRange = 1500.0
 Type = 2
@@ -51,8 +55,18 @@ Speed = 200
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_mkkd5")
-frame_progress = 0.440382
+frame_progress = 0.519098
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_i1kex")
+
+[node name="Area2D" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ftjx2")
+
+[node name="CooldownTimer" type="Timer" parent="." index="5"]
+wait_time = 0.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

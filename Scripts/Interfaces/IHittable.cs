@@ -3,5 +3,5 @@
 using Ionfall.Scripts.Objects;
 
 public interface IHittable {
-    public void OnHit(Bullet bullet);
+    public void OnHit(int damage);
 }

@@ -69,7 +69,9 @@ sprite_frames = SubResource("SpriteFrames_dyq1a")
 frame_progress = 0.369075
 
 [node name="Gun" parent="." index="2"]
+BulletName = "green"
 Target = 1
+BulletSpawnOffset = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.5, 1)
