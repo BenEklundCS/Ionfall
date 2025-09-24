@@ -18,6 +18,11 @@ public abstract partial class Enemy : Character {
 
     [Export] public float SightRange = 300.0f;
     [Export] public float Closeness = 200.0f;
+    
+    public override void _PhysicsProcess(double delta) {
+        EnemyProcess(delta);
+        base._PhysicsProcess(delta);
+    }
 
     protected bool InPlayerRange() {
         return (_trackedPlayer?.GlobalPosition - GlobalPosition)?.Abs().Length() <= SightRange;
@@ -29,15 +34,15 @@ public abstract partial class Enemy : Character {
 
     protected void MoveToPlayer() {
         if (TrackedPlayer == null) return;
-        var mv = Vector2.Zero;
+        float xmv;
         if (InPlayerRange() && !InCloseRange()) {
             var dir = Globals.GetGameDirectionTo(this, TrackedPlayer);
-            mv.X = dir.Item1 == Globals.GameDirection.L
+            xmv = dir.Item1 == Globals.GameDirection.L
                 ? - Speed
                 :   Speed;
             LastDirection = dir.Item1;
+            Velocity = new Vector2(xmv, Velocity.Y);
         }
-        Velocity = mv;
     }
     
     protected override void HandleAnimation() {
@@ -49,6 +54,8 @@ public abstract partial class Enemy : Character {
             Sprite.Frame = 0;
         }
     }
+
+    protected abstract void EnemyProcess(double delta);
 
     private void OnPlayerDeath(Character character) {
         _trackedPlayer = null;

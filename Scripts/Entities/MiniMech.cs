@@ -18,9 +18,8 @@ public partial class MiniMech : Enemy {
         base._Ready();
     }
 
-    public override void _PhysicsProcess(double delta) {
+    protected override void EnemyProcess(double delta) {
         MoveToPlayer();
-        base._PhysicsProcess(delta);
     }
 
     private void OnShootTimerTimeout() {

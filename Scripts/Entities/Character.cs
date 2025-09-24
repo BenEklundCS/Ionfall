@@ -48,6 +48,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     private CharacterType _type = CharacterType.Neutral;
     
     [Export] public int Score;
+    [Export] public bool GravityEnabled = true;
     [Export] public Globals.GameDirection SpriteDirection;
     [Export] public CharacterType Type { get; protected set; }
     [Export] public int Speed = 400;
@@ -63,7 +64,8 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     }
 
     public override void _PhysicsProcess(double delta) {
-        ApplyGravity(delta);
+        if (GravityEnabled)
+            ApplyGravity(delta);
         HandleAnimation();
         MoveAndSlide();
     }

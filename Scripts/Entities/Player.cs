@@ -21,6 +21,7 @@ public partial class Player : Ally, IControllable, ISpawnable {
 	private Hud _hud;
 	private const int Frames = 48;
 	private int _directionIndex = 0;
+	private Vector2 _crouchOffset = new (0, 15);
 
 	public override void _Ready() {
 	   _sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -55,6 +56,9 @@ public partial class Player : Ally, IControllable, ISpawnable {
 	}
 
 	public void Shoot() {
+		Gun.BulletSpawnOffset = (_sprite.Animation == "crouch") 
+			? _crouchOffset 
+			: Vector2.Zero;
 		Gun.Shoot(GetMouseDirection());
 	}
 

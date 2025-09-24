@@ -36,6 +36,8 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Gun" parent="." index="5"]
-BulletName = "aaa"
+ReloadTime = 2.0
+Cooldown = 0.1
 Target = 2
 ReloadEnabled = true
+AmmoCapacity = 100
