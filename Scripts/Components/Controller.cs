@@ -32,6 +32,10 @@ public partial class Controller : Node2D {
 		if (Input.IsActionPressed("Shoot")) {
 			_controlTarget.Shoot();
 		}
+
+		if (Input.IsActionJustPressed("Reload")) {
+			_controlTarget.Reload();
+		}
 		if (Input.IsActionJustReleased("Left") || Input.IsActionJustReleased("Right")) {
 			_controlTarget.ReleasedMove();
 		}

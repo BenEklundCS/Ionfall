@@ -51,7 +51,7 @@ Speed = 200
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_mkkd5")
-frame_progress = 0.155305
+frame_progress = 0.440382
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(1, 0)

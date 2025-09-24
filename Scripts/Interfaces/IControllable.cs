@@ -8,6 +8,7 @@ public interface IControllable {
     public void Right();
     public void Jump();
     public void Shoot();
+    public void Reload();
     public void Crouch();
     public void ReleasedMove();
 }

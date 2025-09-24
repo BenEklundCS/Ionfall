@@ -28,10 +28,13 @@ public partial class Player : Ally, IControllable, ISpawnable {
 	   _hud = GetNode<Hud>("Hud");
 	   base._Ready();
 	}
-	
+
+	public override void _Process(double delta) {
+		_hud.Data = new HudData(Health, Gun.Magazine, Gun.Ammo); 
+	}
+
 	public override void _PhysicsProcess(double delta) {
 		_directionIndex = FindFrameByMouseAngle();
-		_hud.Data = new GameData(0, Health, Gun.Magazine, Gun.Ammo); 
 		base._PhysicsProcess(delta);
 	}
 
@@ -60,6 +63,10 @@ public partial class Player : Ally, IControllable, ISpawnable {
 			? _crouchOffset 
 			: Vector2.Zero;
 		Gun.Shoot(GetMouseDirection());
+	}
+
+	public void Reload() {
+		Gun.BeginReload();
 	}
 
 	public void Crouch() {

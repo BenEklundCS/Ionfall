@@ -6,7 +6,7 @@ using System;
 using Ionfall.Scripts.Resources;
 
 public partial class Hud : Control {
-	public GameData Data = new ();
+	public HudData Data = new ();
 	private Label _health;
 	private Label _ammo;
 	

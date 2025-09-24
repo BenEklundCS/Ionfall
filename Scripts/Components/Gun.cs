@@ -12,6 +12,7 @@ public partial class Gun : Node2D, IGun {
     private Timer _reloadTimer;
     private Timer _cooldownTimer;
     private bool _onCooldown;
+    private bool _reloading;
     
     [Export] public string BulletName = "blue";
     [Export] public AudioStream ShootSoundEffect;
@@ -61,7 +62,7 @@ public partial class Gun : Node2D, IGun {
     }
 
     public void Shoot(Vector2 direction) {
-        if (_onCooldown) return;
+        if (_onCooldown || _reloading) return;
         
         if (!ReloadEnabled) {
             Fire(direction);
@@ -74,8 +75,7 @@ public partial class Gun : Node2D, IGun {
         }
         else {
             if (Ammo > 0) {
-                if (_reloadTimer.IsStopped())
-                    _reloadTimer.Start();
+                BeginReload();
                 Print("Reloading!");
             }
             else {
@@ -94,22 +94,27 @@ public partial class Gun : Node2D, IGun {
         OnCooldown();
     }
 
-    private void Reload() {
+    public void BeginReload() {
+        if (!_reloadTimer.IsStopped()) return;
+        _reloadTimer.Start();
+        _reloading = true;
+    }
+
+    private void PerformReload() {
         var total = Ammo + Magazine;
         Magazine = Math.Min(MagazineCapacity, total);
         Ammo = total - Magazine;
+        _reloading = false;
     }
 
     private void OnReloadTimerTimeout() {
-        Reload();
+        PerformReload();
     }
 
     private void OnCooldown() {
         if (!_cooldownTimer.IsStopped()) return;
-
         _cooldownTimer.Start();
         _onCooldown = true;
-
     }
 
     private void OnCooldownTimerTimeout() {
