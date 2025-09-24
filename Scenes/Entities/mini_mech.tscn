@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b00h7mfjbbg6u"]
+[gd_scene load_steps=14 format=3 uid="uid://b00h7mfjbbg6u"]
 
 [ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_wyqqp"]
 [ext_resource type="Script" uid="uid://8a326ixdnqy4" path="res://Scripts/Entities/MiniMech.cs" id="2_0mdo6"]
 [ext_resource type="Texture2D" uid="uid://b0igynpb6tmpq" path="res://Assets/Sprites/Enemies/enemies-16col-sheet-alpha.png" id="2_yjfvd"]
-[ext_resource type="AudioStream" uid="uid://c450ptucnpe22" path="res://Assets/Audio/SFX/Space/laser2.mp3" id="4_0mdo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5ux2"]
 size = Vector2(25.75, 25)
@@ -73,9 +72,11 @@ animations = [{
 }]
 
 [node name="MiniMech" instance=ExtResource("1_wyqqp")]
+scale = Vector2(2, 2)
 script = ExtResource("2_0mdo6")
 SightRange = 800.0
-Closeness = 200.0
+Type = 2
+BulletSpawnOffset = Vector2(50, 0)
 Speed = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -88,6 +89,3 @@ frame_progress = 0.575865
 
 [node name="ShootTimer" type="Timer" parent="." index="3"]
 autostart = true
-
-[node name="ShootSound" parent="." index="4"]
-stream = ExtResource("4_0mdo6")

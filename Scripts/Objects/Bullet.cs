@@ -9,29 +9,27 @@ using System;
 using Ionfall.Scripts.Interfaces;
 
 public partial class Bullet : CharacterBody2D, ISpawnable {
-    [Export] public SpriteFrames SpriteFrames;
     [Export] public float Speed = 1000.0f;
     [Export] public Vector2 Direction;
     [Export] public int Damage = 10;
+    [Export] public float LifeTime = 0.5f;
     
     [Export]
     public Character.CharacterType Target = Character.CharacterType.Neutral;
-
-    private AnimatedSprite2D _animatedSprite2D;
+    
     private Area2D _area;
     
     public override void _Ready() {
-        _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        _animatedSprite2D.SpriteFrames = SpriteFrames;
-        _animatedSprite2D.Play("default");
-        _animatedSprite2D.AnimationFinished += OnAnimationFinished;
-        
         _area = GetNode<Area2D>("Area2D");
         _area.BodyEntered += OnBodyEntered;
     }
 
     public override void _PhysicsProcess(double delta) {
         Velocity = Direction * Speed;
+        LifeTime -= (float)delta;
+        if (LifeTime <= 0) {
+            QueueFree();
+        }
         MoveAndSlide();
     }
 
@@ -39,17 +37,13 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
         return (Node2D)Load<PackedScene>("res://Scenes/Objects/bullet.tscn").Instantiate();
     }
 
-    private void OnAnimationFinished() {
+    private void OnBodyEntered(Node2D body) {
+        if (body is not Character character || !IsTarget(character)) return;
+        character.OnHit(this);
         QueueFree();
     }
 
-    private void OnBodyEntered(Node2D body) {
-        if (body is Character character && 
-            (Target == Character.CharacterType.Neutral 
-             || character.Type == Target)
-            ) {
-            character.OnHit(this);
-            QueueFree();
-        }
+    private bool IsTarget(Character character) {
+        return Target == Character.CharacterType.Neutral || character.Type == Target;
     }
 }

@@ -15,6 +15,10 @@ run/main_scene="uid://bma3u0f2t70ty"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+BulletFactory="*res://Scenes/Components/bullet_factory.tscn"
+
 [display]
 
 window/size/viewport_width=1280

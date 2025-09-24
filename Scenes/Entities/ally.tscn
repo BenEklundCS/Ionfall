@@ -1,8 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://brg3naay62pbi"]
+[gd_scene load_steps=2 format=3 uid="uid://brg3naay62pbi"]
 
 [ext_resource type="PackedScene" uid="uid://c4wyl23fcnbte" path="res://Scenes/Entities/character.tscn" id="1_xrser"]
-[ext_resource type="Script" uid="uid://2chq72wgu70s" path="res://Scripts/Entities/Ally.cs" id="2_2fijy"]
 
 [node name="Ally" instance=ExtResource("1_xrser")]
-script = ExtResource("2_2fijy")
-Type = 1

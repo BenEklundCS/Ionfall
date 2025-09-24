@@ -3,7 +3,7 @@ using Godot;
 
 namespace Ionfall.Scripts;
 
-public class Globals {
+public static class Globals {
     public enum GameDirection {
         L, R, U, D
     }

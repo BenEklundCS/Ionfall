@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://h2k1x051u55u"]
+[gd_scene load_steps=2 format=3 uid="uid://h2k1x051u55u"]
 
 [ext_resource type="PackedScene" uid="uid://c4wyl23fcnbte" path="res://Scenes/Entities/character.tscn" id="1_r2gkr"]
-[ext_resource type="Script" uid="uid://b3rrah6lc6hu6" path="res://Scripts/Entities/Enemy.cs" id="2_o6kgl"]
 
 [node name="Enemy" instance=ExtResource("1_r2gkr")]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("2_o6kgl")
-SightRange = 300.0
-Type = 2

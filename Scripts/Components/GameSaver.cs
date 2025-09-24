@@ -30,6 +30,8 @@ namespace Ionfall.Scripts.Components {
 			// Set exported props
 			res.Set("high_score", data.HighScore);
 			res.Set("health", data.Health);
+			res.Set("ammo", data.Ammo);
+			res.Set("magazine", data.Magazine);
 
 			var err = ResourceSaver.Save(res, SavePath);
 			if (err != Error.Ok) GD.PrintErr($"Save failed: {err}");
@@ -49,7 +51,14 @@ namespace Ionfall.Scripts.Components {
 			// get data from loaded resource
 			var hs = (int)res.Get("high_score");
 			var hp = (int)res.Get("health");
-			return new GameData { HighScore = hs, Health = hp };
+			var ammo = (int)res.Get("ammo");
+			var mag = (int)res.Get("magazine");
+			return new GameData {
+				HighScore = hs, 
+				Health = hp,
+				Ammo = ammo,
+				Magazine = mag,
+			};
 		}
 
 		public void Clear() {

@@ -1,10 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbiggxrhenq1w"]
 
 [ext_resource type="PackedScene" uid="uid://ba4crtph3hia3" path="res://Scenes/Levels/level.tscn" id="1_oqg8r"]
-[ext_resource type="PackedScene" uid="uid://b00h7mfjbbg6u" path="res://Scenes/Entities/mini_mech.tscn" id="2_isu7a"]
+[ext_resource type="PackedScene" uid="uid://pknus804tqp5" path="res://Scenes/Entities/mega_mech.tscn" id="3_tbewl"]
 
 [node name="DesertMoon" instance=ExtResource("1_oqg8r")]
 
-[node name="MiniMech" parent="." index="0" instance=ExtResource("2_isu7a")]
-position = Vector2(472, 582)
-scale = Vector2(2, 2)
+[node name="Player" parent="Controller" index="0"]
+Type = 1
+
+[node name="MegaMech" parent="." index="5" instance=ExtResource("3_tbewl")]
+position = Vector2(806, 530)
+scale = Vector2(4, 4)

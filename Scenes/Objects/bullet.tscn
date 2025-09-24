@@ -1,121 +1,27 @@
-[gd_scene load_steps=18 format=3 uid="uid://c80m2fvii21wv"]
+[gd_scene load_steps=5 format=3 uid="uid://c80m2fvii21wv"]
 
 [ext_resource type="Script" uid="uid://bcij28yla6cfg" path="res://Scripts/Objects/Bullet.cs" id="1_3cvgi"]
 [ext_resource type="Texture2D" uid="uid://br83lh7hchvxm" path="res://Assets/Sprites/Effects/projectiles-sheet-alpha.png" id="2_hbw2t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3cvgi"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(0, 0, 18, 18)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cvgi"]
+size = Vector2(17, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hbw2t"]
 atlas = ExtResource("2_hbw2t")
-region = Rect2(18, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_di161"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(36, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xfiki"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(54, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqv3d"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(72, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtypv"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(90, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uhyrb"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(108, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_acyyl"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(126, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w120t"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(144, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f0v07"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(162, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4t5f"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(180, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_goku7"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(198, 0, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jc7xn"]
-atlas = ExtResource("2_hbw2t")
-region = Rect2(216, 0, 18, 18)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1c8ci"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3cvgi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hbw2t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_di161")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xfiki")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xqv3d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qtypv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uhyrb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_acyyl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w120t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f0v07")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m4t5f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_goku7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jc7xn")
-}],
-"loop": false,
-"name": &"default",
-"speed": 20.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cvgi"]
+region = Rect2(0.161236, -0.0278111, 17.6809, 18.3161)
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_3cvgi")
-SpriteFrames = SubResource("SpriteFrames_1c8ci")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_1c8ci")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3cvgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hbw2t")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

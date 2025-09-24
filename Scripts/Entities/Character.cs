@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ionfall.Scripts.Components;
 
 namespace Ionfall.Scripts.Entities;
 
@@ -8,15 +9,13 @@ using Ionfall.Scripts.Objects;
 using Godot;
 using static Godot.GD;
 
-public partial class Character : CharacterBody2D, IHittable {
+public abstract partial class Character : CharacterBody2D, IHittable {
     //signals
     [Signal] public delegate void OnDeathEventHandler(Character character);
     
     // protected
     protected AnimatedSprite2D Sprite;
-    protected AudioStreamPlayer2D ShootSound;
-    
-    protected Globals.GameDirection SpriteDirection = Globals.GameDirection.R;
+    protected Gun Gun;
     protected Globals.GameDirection LastDirection {
         get => _lastDirection;
         set {
@@ -49,8 +48,8 @@ public partial class Character : CharacterBody2D, IHittable {
     private CharacterType _type = CharacterType.Neutral;
     
     [Export] public int Score;
+    [Export] public Globals.GameDirection SpriteDirection;
     [Export] public CharacterType Type { get; protected set; }
-    [Export] public int BulletSpawnDistance = 50;
     [Export] public int Speed = 400;
     [Export] public int FlashTimes = 6;
     [Export] public Color DefaultModulate = Color.Color8(255, 255, 255);
@@ -58,13 +57,14 @@ public partial class Character : CharacterBody2D, IHittable {
 
     public override void _Ready() {
         Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        ShootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
+        Gun = GetNode<Gun>("Gun");
         _flashTimer = GetNode<Timer>("FlashTimer");
         _flashTimer.Timeout += OnFlashTimerTimeout;
     }
 
     public override void _PhysicsProcess(double delta) {
         ApplyGravity(delta);
+        HandleAnimation();
         MoveAndSlide();
     }
     
@@ -72,6 +72,8 @@ public partial class Character : CharacterBody2D, IHittable {
         Health -= bullet.Damage;
         if (_flashTimer.IsStopped()) _flashTimer.Start();
     }
+    
+    protected abstract void HandleAnimation();
 
     private void ApplyGravity(double delta) {
         Velocity = new Vector2(Velocity.X, Velocity.Y + (GetGravity().Y * (float)delta));
