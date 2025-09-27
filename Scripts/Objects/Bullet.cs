@@ -22,6 +22,7 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
     public override void _Ready() {
         _area = GetNode<Area2D>("Area2D");
         _area.BodyEntered += OnBodyEntered;
+        _area.AreaEntered += OnAreaEntered;
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -37,13 +38,19 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
         return (Node2D)Load<PackedScene>("res://Scenes/Objects/bullet.tscn").Instantiate();
     }
 
+    private bool IsTarget(Character character) {
+        return Target == Character.CharacterType.Neutral || character.Type == Target;
+    }
+    
     private void OnBodyEntered(Node2D body) {
-        if (body is not Character character || !IsTarget(character)) return;
-        character.OnHit(Damage);
+        if (body is Bullet) return;
+        if (body is Character character && IsTarget(character)) {
+            character.OnHit(Damage);
+        };
         QueueFree();
     }
 
-    private bool IsTarget(Character character) {
-        return Target == Character.CharacterType.Neutral || character.Type == Target;
+    private void OnAreaEntered(Area2D area) {
+        QueueFree();
     }
 }

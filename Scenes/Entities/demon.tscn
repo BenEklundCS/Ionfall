@@ -46,14 +46,26 @@ size = Vector2(93, 51)
 [node name="Demon" instance=ExtResource("1_0witb")]
 script = ExtResource("2_4y0qm")
 SightRange = 1000.0
+Closeness = 400.0
+Accuracy = 50.0
+Health = 50
 GravityEnabled = false
 Type = 2
-Speed = 200
+Speed = 100
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_omrr0")
-frame_progress = 0.839803
+frame_progress = 0.637492
+
+[node name="Gun" parent="." index="2"]
+BulletName = "red"
+ReloadTime = 0.1
+Cooldown = 0.1
+Target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_hwrm3")
+
+[node name="ShootTimer" type="Timer" parent="." index="4"]
+autostart = true

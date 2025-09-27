@@ -55,7 +55,11 @@ Speed = 200
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_mkkd5")
-frame_progress = 0.519098
+frame_progress = 0.0735732
+
+[node name="Gun" parent="." index="2"]
+ReloadTime = 0.1
+Cooldown = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 shape = SubResource("RectangleShape2D_i1kex")

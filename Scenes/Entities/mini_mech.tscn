@@ -75,8 +75,9 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("2_0mdo6")
 SightRange = 800.0
+Accuracy = 50.0
+Health = 30
 Type = 2
-BulletSpawnOffset = Vector2(50, 0)
 Speed = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -89,3 +90,9 @@ frame_progress = 0.575865
 
 [node name="ShootTimer" type="Timer" parent="." index="3"]
 autostart = true
+
+[node name="Gun" parent="." index="4"]
+ReloadTime = 0.1
+Cooldown = 0.1
+Target = 1
+BulletSpawnDistance = 30

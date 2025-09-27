@@ -55,6 +55,7 @@ public partial class Gun : Node2D, IGun {
         _reloadTimer.Timeout += OnReloadTimerTimeout;
 
         _cooldownTimer = GetNode<Timer>("CooldownTimer");
+        _cooldownTimer.WaitTime = Cooldown;
         _cooldownTimer.Timeout += OnCooldownTimerTimeout;
         
         if (ShootSoundEffect != null) 

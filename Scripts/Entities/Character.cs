@@ -58,15 +58,16 @@ public abstract partial class Character : CharacterBody2D, IHittable {
 
     public override void _Ready() {
         Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        Sprite.Play();
         Gun = GetNode<Gun>("Gun");
         _flashTimer = GetNode<Timer>("FlashTimer");
         _flashTimer.Timeout += OnFlashTimerTimeout;
     }
 
     public override void _PhysicsProcess(double delta) {
+        HandleAnimation();
         if (GravityEnabled)
             ApplyGravity(delta);
-        HandleAnimation();
         MoveAndSlide();
     }
     

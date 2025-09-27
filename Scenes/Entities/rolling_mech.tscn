@@ -1,0 +1,139 @@
+[gd_scene load_steps=16 format=3 uid="uid://cgtchtfw71ysk"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_1yxy3"]
+[ext_resource type="Script" uid="uid://dxlvb6006oxj7" path="res://Scripts/Entities/RollingMech.cs" id="2_8qk34"]
+[ext_resource type="Texture2D" uid="uid://b4ioywp5uwx1b" path="res://Assets/Sprites/Enemies/rollermech.png" id="3_fx13j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63107"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(0, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7exxl"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(38, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mfv6"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(152, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lowv"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(0, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unn68"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(38, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn4bm"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(76, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgl55"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(114, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yorl6"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(152, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ppi2"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(76, 0, 38, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85oy7"]
+atlas = ExtResource("3_fx13j")
+region = Rect2(114, 0, 38, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86vcr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63107")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7exxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63107")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7exxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63107")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7exxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63107")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7exxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mfv6")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lowv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unn68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bn4bm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgl55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yorl6")
+}],
+"loop": true,
+"name": &"moving_shooting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ppi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85oy7")
+}],
+"loop": true,
+"name": &"stationary_shooting",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yxy3"]
+size = Vector2(34, 40)
+
+[node name="RollingMech" instance=ExtResource("1_1yxy3")]
+scale = Vector2(2, 2)
+script = ExtResource("2_8qk34")
+SightRange = 1000.0
+Closeness = 300.0
+Accuracy = 50.0
+Type = 2
+Speed = 200
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_86vcr")
+animation = &"moving"
+frame_progress = 0.848992
+
+[node name="Gun" parent="." index="2"]
+BulletName = "red"
+ReloadTime = 0.1
+Cooldown = 1.0
+Target = 1
+BulletSpawnOffset = Vector2(0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_1yxy3")

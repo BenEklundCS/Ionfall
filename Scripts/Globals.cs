@@ -8,13 +8,15 @@ public static class Globals {
         L, R, U, D
     }
 
-    public static Tuple<GameDirection, GameDirection> GetGameDirectionTo(Node2D pos, Node2D dest) {
+    public static Tuple<GameDirection, GameDirection> GetGameDirection(Node2D pos, Node2D dest) {
         var x = (dest.GlobalPosition.X < pos.GlobalPosition.X)
             ? GameDirection.L
             : GameDirection.R;
         var y = (dest.GlobalPosition.Y < pos.GlobalPosition.Y)
-            ? GameDirection.D
-            : GameDirection.U;
+            ? GameDirection.U
+            : GameDirection.D;
         return new Tuple<GameDirection, GameDirection>(x, y);
     }
+
+    public static Random Random = new ();
 }

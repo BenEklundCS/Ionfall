@@ -61,6 +61,7 @@ size = Vector2(51, 56)
 scale = Vector2(2, 2)
 script = ExtResource("2_ekml0")
 SightRange = 1000.0
+Accuracy = 50.0
 Type = 2
 Speed = 100
 
@@ -70,8 +71,10 @@ frame_progress = 0.369075
 
 [node name="Gun" parent="." index="2"]
 BulletName = "green"
+ReloadTime = 0.1
+Cooldown = 0.1
 Target = 1
-BulletSpawnOffset = Vector2(0, 0)
+BulletSpawnDistance = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0.5, 1)

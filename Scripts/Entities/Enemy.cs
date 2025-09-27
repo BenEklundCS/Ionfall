@@ -18,6 +18,7 @@ public abstract partial class Enemy : Character {
 
     [Export] public float SightRange = 300.0f;
     [Export] public float Closeness = 200.0f;
+    [Export] public float Accuracy;
     
     public override void _PhysicsProcess(double delta) {
         EnemyProcess(delta);
@@ -28,20 +29,28 @@ public abstract partial class Enemy : Character {
         return (_trackedPlayer?.GlobalPosition - GlobalPosition)?.Abs().Length() <= SightRange;
     }
 
-    private bool InCloseRange() {
+    protected bool InCloseRange() {
         return (_trackedPlayer?.GlobalPosition - GlobalPosition)?.Abs().Length() <= Closeness;
+    }
+
+    protected Vector2 DirectionToTrackedPlayer() {
+        var randomOffsetVector = new Vector2(0, (float)(Globals.Random.NextDouble() * 2.0 - 1.0) * Accuracy);
+        var position = TrackedPlayer.GlobalPosition + randomOffsetVector;
+        return GlobalPosition.DirectionTo(position).Normalized();
     }
 
     protected void MoveToPlayer() {
         if (TrackedPlayer == null) return;
-        float xmv;
         if (InPlayerRange() && !InCloseRange()) {
-            var dir = Globals.GetGameDirectionTo(this, TrackedPlayer);
-            xmv = dir.Item1 == Globals.GameDirection.L
+            var dir = Globals.GetGameDirection(this, TrackedPlayer);
+            float xmv = dir.Item1 == Globals.GameDirection.L
                 ? - Speed
                 :   Speed;
             LastDirection = dir.Item1;
             Velocity = new Vector2(xmv, Velocity.Y);
+        }
+        else {
+            Velocity = new Vector2(0, Velocity.Y);
         }
     }
     
