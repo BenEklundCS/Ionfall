@@ -23,7 +23,7 @@ Status: WIP
 
 ## Project Structure
     Ionfall/
-      Assets/         Sprites, audio, fonts
+      Assets/         Sprites, audio, fonts (not provided in repo)
       Scenes/         Godot scenes (levels, entities, UI)
       Scripts/        Game logic (C#)
         Entities/     Player, enemies, projectiles
