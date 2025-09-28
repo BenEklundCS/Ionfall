@@ -28,24 +28,15 @@ public partial class MovingPlatform : StaticBody2D {
                 ? _targetPosition 
                 : _initialPosition
             ) * (MoveSpeed * (float)delta);
-        
-    }
-
-    private void Clamp() {
-        GlobalPosition = (_targetPosition > _initialPosition)
-            ? GlobalPosition.Clamp(_initialPosition, _targetPosition)
-            : GlobalPosition.Clamp(_targetPosition, _initialPosition);
     }
 
     private void Bounce() {
-        if (!Continuous) return;
-        if ((GlobalPosition.DistanceTo(_targetPosition) < 1f && _movingToTarget) 
-            || (GlobalPosition.DistanceTo(_initialPosition) < 1f && !_movingToTarget)
-        ) {
-            GlobalPosition = _movingToTarget 
-                ? _targetPosition 
-                : _initialPosition; 
-            _movingToTarget = !_movingToTarget;
-        }
+        if (!Continuous || !ReachedDestination()) return;
+        _movingToTarget = !_movingToTarget;
+    }
+
+    private bool ReachedDestination() {
+        return (GlobalPosition.DistanceTo(_targetPosition) < 1f && _movingToTarget)
+               || (GlobalPosition.DistanceTo(_initialPosition) < 1f && !_movingToTarget);
     }
 }

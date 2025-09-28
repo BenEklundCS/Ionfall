@@ -26,7 +26,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     }
     
     // private
-    private Globals.GameDirection _lastDirection = Globals.GameDirection.R;
+    private Globals.GameDirection _lastDirection;
     private int _flashedTimes = 0;
     private Timer _flashTimer;
     // fields
