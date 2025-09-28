@@ -1018,7 +1018,7 @@ sources/0 = SubResource("TileSetAtlasSource_7kpfv")
 [node name="DesertMoon" instance=ExtResource("1_oqg8r")]
 
 [node name="Player" parent="Controller" index="0"]
-position = Vector2(4707.97, 474.966)
+position = Vector2(19.6415, 584.037)
 JumpForce = 600
 Type = 1
 Speed = 500

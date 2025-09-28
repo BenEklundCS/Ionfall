@@ -22,7 +22,6 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
     public override void _Ready() {
         _area = GetNode<Area2D>("Area2D");
         _area.BodyEntered += OnBodyEntered;
-        _area.AreaEntered += OnAreaEntered;
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -47,10 +46,6 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
         if (body is Character character && IsTarget(character)) {
             character.OnHit(Damage);
         };
-        QueueFree();
-    }
-
-    private void OnAreaEntered(Area2D area) {
         QueueFree();
     }
 }
