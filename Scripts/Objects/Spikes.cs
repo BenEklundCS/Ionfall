@@ -25,19 +25,16 @@ public partial class Spikes : Node2D {
     [Export] public int Damage = 10;
 
     public override void _EnterTree() {
-        // in-editor, called as soon as node is added to scene
         Init();
     }
 
     public override void _Ready() {
-        // at runtime, called once children are ready
         Init();
     }
 
     private void Init() {
         if (_init) return;
 
-        // Safe to assume children exist now
         _timer = GetNode<Timer>("Timer");
         _timer.Timeout += OnTimerTimeout;
 
@@ -46,7 +43,7 @@ public partial class Spikes : Node2D {
 
         var shapeNode = _area.GetNode<CollisionShape2D>("CollisionShape2D");
         _rectangle = (RectangleShape2D)shapeNode.Shape.Duplicate();
-        shapeNode.Shape = _rectangle; // assign the unique copy
+        shapeNode.Shape = _rectangle;
 
         _sprite = GetNode<Sprite2D>("Sprite2D");
         _sprite.RegionEnabled = true;
@@ -54,12 +51,11 @@ public partial class Spikes : Node2D {
 
         _init = true;
 
-        // Apply initial sizing
         SetSize();
     }
 
     private void SetSize() {
-        if (!_init) return; // ignore property sets before Init
+        if (!_init) return;
 
         var size = new Vector2(SpikeCount * Base, Base);
         _rectangle.Size = size;
