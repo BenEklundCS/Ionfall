@@ -9,8 +9,8 @@ public partial class MovingPlatform : StaticBody2D {
     private bool _movingToTarget = true;
     
     [Export] public Vector2 MoveOffset;
-    [Export] public float MoveSpeed;
-    [Export] public bool Continuous;
+    [Export] public float MoveSpeed = 100f;
+    [Export] public bool Continuous = true;
 
     public override void _Ready() {
         _initialPosition = GlobalPosition;
@@ -23,20 +23,16 @@ public partial class MovingPlatform : StaticBody2D {
     }
 
     private void Move(double delta) {
-        GlobalPosition += GlobalPosition
-            .DirectionTo((_movingToTarget) 
-                ? _targetPosition 
-                : _initialPosition
-            ) * (MoveSpeed * (float)delta);
+        var dest = _movingToTarget ? _targetPosition : _initialPosition;
+        var dir = dest - GlobalPosition;
+        var step = Mathf.Min(MoveSpeed * (float)delta, dir.Length());
+        GlobalPosition += dir.Normalized() * step;
     }
+
 
     private void Bounce() {
-        if (!Continuous || !ReachedDestination()) return;
-        _movingToTarget = !_movingToTarget;
-    }
-
-    private bool ReachedDestination() {
-        return (GlobalPosition.DistanceTo(_targetPosition) < 1f && _movingToTarget)
-               || (GlobalPosition.DistanceTo(_initialPosition) < 1f && !_movingToTarget);
+        if (!Continuous) return;
+        if (GlobalPosition == (_movingToTarget ? _targetPosition : _initialPosition))
+            _movingToTarget = !_movingToTarget;
     }
 }

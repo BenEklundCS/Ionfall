@@ -29,7 +29,6 @@ public partial class ParallaxBackground : Godot.ParallaxBackground {
         sprite.Texture = texture;
         sprite.TextureRepeat = CanvasItem.TextureRepeatEnum.Enabled;
         sprite.RegionEnabled = true;
-        sprite.RegionRect = new Rect2(Vector2.Zero, texture.GetSize());
         sprite.RegionRect = new Rect2(sprite.RegionRect.Position, new Vector2(RegionWidth, RegionWidth));
         sprite.Scale = SpriteScale;
         sprite.GlobalPosition = SpriteSpawnPosition;

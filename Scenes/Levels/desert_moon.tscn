@@ -1,12 +1,14 @@
-[gd_scene load_steps=25 format=4 uid="uid://cbiggxrhenq1w"]
+[gd_scene load_steps=27 format=4 uid="uid://cbiggxrhenq1w"]
 
 [ext_resource type="PackedScene" uid="uid://ba4crtph3hia3" path="res://Scenes/Levels/level.tscn" id="1_oqg8r"]
 [ext_resource type="PackedScene" uid="uid://w0n8218ku42" path="res://Scenes/Objects/moving_platform.tscn" id="2_v22px"]
 [ext_resource type="PackedScene" uid="uid://pknus804tqp5" path="res://Scenes/Entities/mega_mech.tscn" id="3_v22px"]
 [ext_resource type="PackedScene" uid="uid://b00h7mfjbbg6u" path="res://Scenes/Entities/mini_mech.tscn" id="4_7kpfv"]
 [ext_resource type="PackedScene" uid="uid://dmbhk85kxcpfw" path="res://Scenes/Entities/demon.tscn" id="6_ksduw"]
+[ext_resource type="PackedScene" uid="uid://cjyivbgxl05g8" path="res://Scenes/Objects/spikes.tscn" id="8_668by"]
 [ext_resource type="Texture2D" uid="uid://c78x61we1ghqh" path="res://Assets/Sprites/Environment/tiles-tech-steel-gold-alpha.png" id="8_g8w4j"]
 [ext_resource type="PackedScene" uid="uid://cfi12jv7i8n3h" path="res://Scenes/Objects/collision_box.tscn" id="8_ksduw"]
+[ext_resource type="FontFile" uid="uid://ctgnclojfllbk" path="res://Assets/Fonts/Bitty.ttf" id="9_ksduw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8w4j"]
 size = Vector2(539.5, 222.25)
@@ -1018,7 +1020,7 @@ sources/0 = SubResource("TileSetAtlasSource_7kpfv")
 [node name="DesertMoon" instance=ExtResource("1_oqg8r")]
 
 [node name="Player" parent="Controller" index="0"]
-position = Vector2(19.6415, 584.037)
+position = Vector2(5342.91, 43.474)
 JumpForce = 600
 Type = 1
 Speed = 500
@@ -1170,4 +1172,30 @@ position = Vector2(4867, 413)
 scale = Vector2(2, 2)
 MoveOffset = Vector2(0, -300)
 MoveSpeed = 50.0
-Continuous = true
+
+[node name="MovingPlatform2" parent="Environment/Platforms" index="1" instance=ExtResource("2_v22px")]
+position = Vector2(5502, 457)
+MoveOffset = Vector2(0, -300)
+
+[node name="MovingPlatform3" parent="Environment/Platforms" index="2" instance=ExtResource("2_v22px")]
+position = Vector2(5712, 118)
+MoveOffset = Vector2(0, 200)
+MoveSpeed = 50.0
+
+[node name="Text" type="Node" parent="Environment" index="3"]
+
+[node name="Label" type="Label" parent="Environment/Text" index="0"]
+offset_left = 5513.0
+offset_top = -144.0
+offset_right = 5770.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("9_ksduw")
+theme_override_font_sizes/font_size = 100
+text = "DONT FALL
+   >:)"
+
+[node name="Obstacle" type="Node" parent="Environment" index="4"]
+
+[node name="Spikes" parent="Environment/Obstacle" index="0" instance=ExtResource("8_668by")]
+position = Vector2(6162, 528)
+SpikeCount = 50
