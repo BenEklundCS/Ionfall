@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://8pd6wv4yeuth"]
+
+[ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_m1ogp"]
+[ext_resource type="Texture2D" uid="uid://cvb7l0neknx3p" path="res://Assets/Sprites/Enemies/enemies2-16col-sheet-alpha.png" id="2_fhv70"]
+[ext_resource type="Script" uid="uid://djohfons7jvme" path="res://Scripts/Entities/Cannon.cs" id="2_p8yp2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhv70"]
+atlas = ExtResource("2_fhv70")
+region = Rect2(128, 270, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8yp2"]
+atlas = ExtResource("2_fhv70")
+region = Rect2(96, 270, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocoqm"]
+atlas = ExtResource("2_fhv70")
+region = Rect2(64, 270, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifptt"]
+atlas = ExtResource("2_fhv70")
+region = Rect2(32, 270, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1ogp"]
+atlas = ExtResource("2_fhv70")
+region = Rect2(0, 270, 32, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g16ft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhv70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8yp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocoqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifptt")
+}],
+"loop": false,
+"name": &"charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1ogp")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhv70"]
+size = Vector2(32, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocoqm"]
+size = Vector2(32, 29)
+
+[node name="Cannon" instance=ExtResource("1_m1ogp")]
+script = ExtResource("2_p8yp2")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_g16ft")
+animation = &"idle"
+
+[node name="Gun" parent="." index="2"]
+BulletName = "red"
+ReloadTime = 0.1
+Cooldown = 0.1
+
+[node name="Detection" type="Area2D" parent="." index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" index="0"]
+shape = SubResource("RectangleShape2D_fhv70")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ocoqm")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Detection" to="." method="_on_sight_body_entered"]
