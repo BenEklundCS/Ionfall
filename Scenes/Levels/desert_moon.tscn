@@ -1021,7 +1021,7 @@ sources/0 = SubResource("TileSetAtlasSource_7kpfv")
 [node name="DesertMoon" instance=ExtResource("1_oqg8r")]
 
 [node name="Player" parent="Controller" index="0"]
-position = Vector2(-1328, 589)
+position = Vector2(2400, -206)
 JumpForce = 600
 Type = 1
 Speed = 500
@@ -1201,8 +1201,8 @@ text = "DONT FALL
 position = Vector2(6162, 528)
 SpikeCount = 50
 
-[node name="Cannon" parent="." index="7" instance=ExtResource("10_668by")]
-position = Vector2(-937, 595)
+[node name="Cannon" parent="Environment/Obstacle" index="1" instance=ExtResource("10_668by")]
+position = Vector2(2818, -194)
 rotation = 1.5708
 scale = Vector2(2, 2)
-DetectionRange = 300.0
+DetectionRange = 500.0

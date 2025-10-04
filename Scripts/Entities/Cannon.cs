@@ -9,7 +9,7 @@ public partial class Cannon : Enemy {
     private CollisionShape2D _shape;
     private Area2D _detection;
     private bool _init;
-
+    private bool _playerDetected;
     private float _detectionRange;
 
     [Export]
@@ -28,7 +28,6 @@ public partial class Cannon : Enemy {
     public override void _Ready() {
         Init();
         base._Ready();
-        
         Sprite.AnimationFinished += OnChargeAnimationFinished;
     }
 
@@ -49,6 +48,7 @@ public partial class Cannon : Enemy {
 
         _detection = GetNode<Area2D>("Detection");
         _detection.BodyEntered += OnBodyEntered;
+        _detection.BodyExited += OnBodyExited;
         
         _shape = _detection.GetNode<CollisionShape2D>("CollisionShape2D");
         
@@ -67,13 +67,20 @@ public partial class Cannon : Enemy {
     }
 
     private void Shoot() {
-        Sprite.Play("charge");
+        if (!Sprite.IsPlaying())
+            Sprite.Play("charge");
     }
 
     private void OnChargeAnimationFinished() {
         if (Sprite.Animation != "charge") return;
         Gun.Shoot(Transform.Y);
-        ResetAnimation();
+
+        if (_playerDetected) {
+            Shoot();
+        }
+        else {
+            ResetAnimation();
+        }
     }
 
     private void ResetAnimation() {
@@ -82,8 +89,14 @@ public partial class Cannon : Enemy {
     }
 
     private void OnBodyEntered(Node2D node) {
-        if (node is Player player) {
-            Shoot();
+        if (node is not Player) return;
+        Shoot();
+        _playerDetected = true;
+    }
+    
+    private void OnBodyExited(Node2D node) {
+        if (node is Player) {
+            _playerDetected = false;
         }
     }
 }
