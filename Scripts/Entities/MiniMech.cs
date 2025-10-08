@@ -14,6 +14,7 @@ public partial class MiniMech : Enemy {
     public override void _Ready() {
         _shootTimer = GetNode<Timer>("ShootTimer");
         _shootTimer.Timeout += OnShootTimerTimeout;
+        _shootTimer.Paused = !Enabled;
         base._Ready();
     }
 

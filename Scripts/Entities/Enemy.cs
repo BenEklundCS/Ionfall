@@ -11,18 +11,22 @@ public abstract partial class Enemy : Character {
     public Player TrackedPlayer {
         get => _trackedPlayer;
         set {
+            if (Engine.IsEditorHint()) return;
             _trackedPlayer = value;
             _trackedPlayer.OnDeath += OnPlayerDeath;
         }
     }
 
+    [Export] public bool Enabled = true;
     [Export] public float SightRange = 300.0f;
     [Export] public float Closeness = 200.0f;
     [Export] public float Accuracy;
     
     public override void _PhysicsProcess(double delta) {
+        if (!Enabled) return;
         EnemyProcess(delta);
         base._PhysicsProcess(delta);
+        
     }
 
     protected bool InPlayerRange() {
