@@ -66,14 +66,14 @@ public partial class Spikes : Node2D {
         if (!_area.HasOverlappingBodies()) return;
         foreach (var body in _area.GetOverlappingBodies()) {
             if (body is Player player) {
-                player.OnHit(Damage);
+                player.Hit(Damage);
             }
         }
     }
 
     private void OnBodyEntered(Node2D node) {
         if (node is Player player) {
-            player.OnHit(Damage);
+            player.Hit(Damage);
             _timer.Start();
         }
     }

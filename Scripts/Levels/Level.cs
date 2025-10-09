@@ -10,6 +10,9 @@ using Godot;
 using System;
 
 public partial class Level : Node2D {
+	[Signal]
+	public delegate void OnPlayerRespawnEventHandler(Player player);
+	
 	private Controller _controller;
 	private Player _player;
 	private Player _playerFactory = new ();
@@ -47,7 +50,10 @@ public partial class Level : Node2D {
 
 	private void RegisterNodeListeners(Node node) {
 		if (node is Character character) character.OnDeath += OnCharacterDeath;
-		if (node is Enemy enemy) enemy.TrackedPlayer = _player;
+		if (node is Enemy enemy) {
+			enemy.TrackedPlayer = _player;
+			OnPlayerRespawn += enemy.OnPlayerRespawn;
+		}
 		if (node is Player player) {
 			_player = player;
 			foreach (var n in GetChildren()) {
@@ -73,5 +79,6 @@ public partial class Level : Node2D {
 		var player = (Player)_playerFactory.Spawn();
 		player.GlobalPosition = _respawnPosition;
 		_controller.AddChild(player);
+		EmitSignalOnPlayerRespawn(player);
 	}
 }

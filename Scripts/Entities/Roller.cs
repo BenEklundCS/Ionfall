@@ -40,7 +40,7 @@ public partial class Roller : Enemy {
     }
 
     private void Hit() {
-        _inRangePlayer?.OnHit(Damage);
+        _inRangePlayer?.Hit(Damage);
     }
 
     private void OnCooldownTimerTimeout() {

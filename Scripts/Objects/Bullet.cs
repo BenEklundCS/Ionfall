@@ -44,7 +44,7 @@ public partial class Bullet : CharacterBody2D, ISpawnable {
     private void OnBodyEntered(Node2D body) {
         if (body is Bullet) return;
         if (body is Character character && IsTarget(character)) {
-            character.OnHit(Damage);
+            character.Hit(Damage);
         };
         QueueFree();
     }

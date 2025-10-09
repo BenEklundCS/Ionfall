@@ -37,7 +37,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     private int _health = 100;
     [Export] public int Health {
         get => _health;
-        private set {
+        set {
             _health = value;
             if (_health > 0) return;
             EmitSignalOnDeath(this);
@@ -71,7 +71,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
         MoveAndSlide();
     }
     
-    public void OnHit(int damage) {
+    public void Hit(int damage) {
         Health -= damage;
         if (_flashTimer.IsStopped()) _flashTimer.Start();
     }

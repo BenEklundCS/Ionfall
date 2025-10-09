@@ -29,6 +29,10 @@ public abstract partial class Enemy : Character {
         
     }
 
+    public void OnPlayerRespawn(Player player) {
+        TrackedPlayer = player;
+    }
+
     protected bool InPlayerRange() {
         return (_trackedPlayer?.GlobalPosition - GlobalPosition)?.Abs().Length() <= SightRange;
     }
