@@ -1,5 +1,7 @@
+using System;
 using Godot;
 using Ionfall.Scripts.Entities;
+using Ionfall.Scripts.Interfaces;
 
 [Tool]
 public partial class Spikes : Node2D {
@@ -72,8 +74,8 @@ public partial class Spikes : Node2D {
     }
 
     private void OnBodyEntered(Node2D node) {
-        if (node is Player player) {
-            player.Hit(Damage);
+        if (node is IHittable hittable) {
+            hittable.Hit(Damage);
             _timer.Start();
         }
     }

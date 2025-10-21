@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://w0n8218ku42"]
+[gd_scene load_steps=7 format=4 uid="uid://w0n8218ku42"]
 
 [ext_resource type="Script" uid="uid://twunpbhyuofu" path="res://Scripts/Objects/MovingPlatform.cs" id="1_3al7h"]
 [ext_resource type="Texture2D" uid="uid://c78x61we1ghqh" path="res://Assets/Sprites/Environment/tiles-tech-steel-gold-alpha.png" id="2_1yepl"]
@@ -968,6 +968,9 @@ sources/0 = SubResource("TileSetAtlasSource_tyq8h")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yepl"]
 size = Vector2(112, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyq8h"]
+size = Vector2(112, 33)
+
 [node name="MovingPlatform" type="StaticBody2D"]
 script = ExtResource("1_3al7h")
 
@@ -978,3 +981,11 @@ tile_set = SubResource("TileSet_n8vgy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_1yepl")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, -0.5)
+shape = SubResource("RectangleShape2D_tyq8h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

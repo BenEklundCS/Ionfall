@@ -29,7 +29,7 @@ public abstract partial class Enemy : Character {
         
     }
 
-    public void OnPlayerRespawn(Player player) {
+    public void OnPlayerSpawn(Player player) {
         TrackedPlayer = player;
     }
 

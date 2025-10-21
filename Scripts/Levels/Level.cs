@@ -11,7 +11,7 @@ using System;
 
 public partial class Level : Node2D {
 	[Signal]
-	public delegate void OnPlayerRespawnEventHandler(Player player);
+	public delegate void OnPlayerSpawnEventHandler(Player player);
 	
 	private Controller _controller;
 	private Player _player;
@@ -52,7 +52,7 @@ public partial class Level : Node2D {
 		if (node is Character character) character.OnDeath += OnCharacterDeath;
 		if (node is Enemy enemy) {
 			enemy.TrackedPlayer = _player;
-			OnPlayerRespawn += enemy.OnPlayerRespawn;
+			OnPlayerSpawn += enemy.OnPlayerSpawn;
 		}
 		if (node is Player player) {
 			_player = player;
@@ -78,7 +78,8 @@ public partial class Level : Node2D {
 	private void OnRespawnTimerTimeout() {
 		var player = (Player)_playerFactory.Spawn();
 		player.GlobalPosition = _respawnPosition;
+		_player = player;
 		_controller.AddChild(player);
-		EmitSignalOnPlayerRespawn(player);
+		EmitSignalOnPlayerSpawn(player);
 	}
 }

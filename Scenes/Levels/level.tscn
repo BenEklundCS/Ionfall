@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cjfn24uyujiac" path="res://Assets/Audio/Music/MainRandomizer.tres" id="6_rv5g2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tq1so"]
-size = Vector2(43285, 495)
+size = Vector2(43687.5, 495)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_f1n8c")
