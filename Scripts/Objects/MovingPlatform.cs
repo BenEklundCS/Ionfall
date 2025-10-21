@@ -47,7 +47,6 @@ public partial class MovingPlatform : StaticBody2D {
     }
 
     private void OnBodyEntered(Node2D body) {
-        Print(body);
         if (body is Character character) {
             character.Velocity = new Vector2(character.Velocity.X, MoveSpeed);
         }

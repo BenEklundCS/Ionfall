@@ -69,6 +69,20 @@ public partial class Player : Ally, IControllable, ISpawnable {
 		Gun.BeginReload();
 	}
 
+	public void RefillAmmo(int amount = -1) {
+		switch (amount) {
+			case < -1:
+				return;
+			case -1:
+				Gun.Ammo = Gun.AmmoCapacity;
+				break;
+			default:
+				Gun.Ammo += amount;
+				break;
+		}
+		Gun.Ammo = Math.Clamp(Gun.Ammo, 0, Gun.AmmoCapacity);
+	}
+
 	public void Crouch() {
 	   _sprite.Play(_sprite.Animation == "crouch" ? "idle" : "crouch");
 	}

@@ -12,10 +12,12 @@ using Ionfall.Scripts.Interfaces;
 public partial class Powerup : Node2D, ISpawnable {
     public enum PowerupType {
         Health,
+        Ammo,
     }
     
     private readonly Dictionary<PowerupType, string> _powerupSprites = new() {
         { PowerupType.Health, "res://Assets/Sprites/Powerups/extralife.png" },
+        { PowerupType.Ammo, "res://Assets/Sprites/Powerups/tripleshot.png"}
     };
 
     private PowerupType _typeBacking = PowerupType.Health;
@@ -39,13 +41,16 @@ public partial class Powerup : Node2D, ISpawnable {
     }
     
     public Node2D Spawn() {
-        return (Powerup)Load<PackedScene>("res://Scenes/Entities/powerup.tscn").Instantiate();
+        return (Powerup)Load<PackedScene>("res://Scenes/Objects/powerup.tscn").Instantiate();
     }
     
-    public void ApplyEffect(Player player) {
+    private void ApplyEffect(Player player) {
         switch (_typeBacking) {
             case PowerupType.Health:
                 player.Health += 10;
+                break;
+            case PowerupType.Ammo:
+                player.RefillAmmo();
                 break;
         }
         QueueFree();

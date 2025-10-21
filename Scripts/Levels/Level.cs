@@ -1,4 +1,5 @@
 using Ionfall.Scripts.Components;
+using Ionfall.Scripts.Objects;
 using Ionfall.Scripts.UI;
 
 namespace Ionfall.Scripts.Levels;
@@ -10,12 +11,12 @@ using Godot;
 using System;
 
 public partial class Level : Node2D {
-	[Signal]
-	public delegate void OnPlayerSpawnEventHandler(Player player);
+	[Signal] public delegate void OnPlayerSpawnEventHandler(Player player);
 	
 	private Controller _controller;
 	private Player _player;
 	private Player _playerFactory = new ();
+	private Powerup _powerupFactory = new ();
 	private Timer _respawnTimer;
 	private Vector2 _respawnPosition = Vector2.Zero;
 	
@@ -72,6 +73,16 @@ public partial class Level : Node2D {
 		if (character is Player player) {
 			_respawnPosition = _player.GlobalPosition;
 			_respawnTimer.Start();
+		}
+
+		if (character is Enemy enemy) {
+			var shouldDropPowerup = Globals.Random.NextDouble() >= 0.5f; // 50/50 true/false
+			if (shouldDropPowerup) {
+				var powerup = _powerupFactory.Spawn();
+				powerup.Position = enemy.GlobalPosition;
+				powerup.Scale *= 2;
+				GetTree().Root.AddChild(powerup);
+			}
 		}
 	}
 
