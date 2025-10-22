@@ -76,12 +76,14 @@ public partial class Level : Node2D {
 		}
 
 		if (character is Enemy enemy) {
-			var shouldDropPowerup = Globals.Random.NextDouble() >= 0.5f; // 50/50 true/false
+			var shouldDropPowerup = Globals.Random.NextDouble() >= 0.0f; // 50/50 true/false
 			if (shouldDropPowerup) {
 				var powerup = _powerupFactory.Spawn();
 				powerup.Position = enemy.GlobalPosition;
 				powerup.Scale *= 2;
-				GetTree().Root.AddChild(powerup);
+				Callable.From(() => {
+					GetTree().Root.AddChild(powerup);
+				}).CallDeferred();
 			}
 		}
 	}

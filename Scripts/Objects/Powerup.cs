@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Ionfall.Scripts.Interfaces;
 
-public partial class Powerup : Node2D, ISpawnable {
+public partial class Powerup : CharacterBody2D, ISpawnable {
     public enum PowerupType {
         Health,
         Ammo,
@@ -39,7 +39,12 @@ public partial class Powerup : Node2D, ISpawnable {
         _sprite = GetNode<Sprite2D>("Sprite2D");
         Type = GetRandomPowerupType();
     }
-    
+
+    public override void _PhysicsProcess(double delta) {
+        Velocity = new Vector2(Velocity.X, Velocity.Y + (GetGravity().Y * (float)delta));
+        MoveAndSlide();
+    }
+
     public Node2D Spawn() {
         return (Powerup)Load<PackedScene>("res://Scenes/Objects/powerup.tscn").Instantiate();
     }
