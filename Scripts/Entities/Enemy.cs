@@ -1,3 +1,4 @@
+using System.Threading;
 using Ionfall.Scripts.Interfaces;
 using Ionfall.Scripts.Objects;
 
@@ -8,6 +9,7 @@ using System;
 
 public abstract partial class Enemy : Character {
     private Player _trackedPlayer;
+    private RayCast2D _rayCast;
     public Player TrackedPlayer {
         get => _trackedPlayer;
         set {
@@ -21,16 +23,26 @@ public abstract partial class Enemy : Character {
     [Export] public float SightRange = 300.0f;
     [Export] public float Closeness = 200.0f;
     [Export] public float Accuracy;
-    
+
+    public override void _Ready() {
+        _rayCast = GetNode<RayCast2D>("RayCast2D");
+        base._Ready();
+    }
+
     public override void _PhysicsProcess(double delta) {
         if (!Enabled) return;
         EnemyProcess(delta);
+        _rayCast.GlobalPosition = GlobalPosition;
+        _rayCast.TargetPosition = DirectionToTrackedPlayer() * SightRange;
         base._PhysicsProcess(delta);
-        
     }
 
     public void OnPlayerSpawn(Player player) {
         TrackedPlayer = player;
+    }
+
+    protected bool PlayerLineOfSight() {
+        return _rayCast.GetCollider() is Player;
     }
 
     protected bool InPlayerRange() {

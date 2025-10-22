@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://uq55ldhe108u"]
+[gd_scene load_steps=5 format=3 uid="uid://uq55ldhe108u"]
 
 [ext_resource type="Script" uid="uid://didrbstrvap2q" path="res://Scripts/Components/Gun.cs" id="1_lxp0b"]
 [ext_resource type="AudioStream" uid="uid://dt7v4hlt34yld" path="res://Assets/Audio/SFX/Space/laser1.mp3" id="1_u5swf"]
+[ext_resource type="AudioStream" uid="uid://cglapi6xx1ctt" path="res://Assets/Audio/SFX/Clicks/outofammo.wav" id="3_rw1cr"]
+[ext_resource type="AudioStream" uid="uid://b3x7l5twgtygk" path="res://Assets/Audio/SFX/Clicks/weapload.wav" id="4_gh3ea"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_lxp0b")
@@ -19,3 +21,11 @@ one_shot = true
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rw1cr")
+volume_db = 24.0
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gh3ea")
+volume_db = 24.0

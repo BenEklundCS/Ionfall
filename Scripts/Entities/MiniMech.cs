@@ -23,7 +23,7 @@ public partial class MiniMech : Enemy {
     }
 
     private void OnShootTimerTimeout() {
-        if (InPlayerRange()) {
+        if (InPlayerRange() && PlayerLineOfSight()) {
             Gun.Shoot(DirectionToTrackedPlayer());
         }
     }

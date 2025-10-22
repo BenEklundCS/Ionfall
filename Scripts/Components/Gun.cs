@@ -45,11 +45,16 @@ public partial class Gun : Node2D, IGun {
     [Export] public Vector2 BulletSpawnOffset = new (50, 0);
 
     private AudioStreamPlayer2D _shootSound;
+    private AudioStreamPlayer2D _emptySound;
+    private AudioStreamPlayer2D _reloadSound;
 
     public override void _Ready() {
         Magazine = MagazineCapacity;
         Ammo = AmmoCapacity;
+        
         _shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
+        _emptySound = GetNode<AudioStreamPlayer2D>("EmptySound");
+        _reloadSound = GetNode<AudioStreamPlayer2D>("ReloadSound");
         
         _reloadTimer = GetNode<Timer>("ReloadTimer");
         _reloadTimer.Timeout += OnReloadTimerTimeout;
@@ -63,7 +68,7 @@ public partial class Gun : Node2D, IGun {
     }
 
     public void Shoot(Vector2 direction) {
-        if (_onCooldown || _reloading) return;
+        if (_onCooldown) return;
         
         if (!ReloadEnabled) {
             Fire(direction);
@@ -75,12 +80,13 @@ public partial class Gun : Node2D, IGun {
             Magazine -= 1;
         }
         else {
-            if (Ammo > 0) {
+            if (Ammo > 0 && !_reloading) {
                 BeginReload();
                 Print("Reloading!");
             }
             else {
                 Print("Out of ammo!");
+                if (!_emptySound.IsPlaying()) _emptySound.Play();
             }
         }
     }
@@ -98,6 +104,7 @@ public partial class Gun : Node2D, IGun {
     public void BeginReload() {
         if (!_reloadTimer.IsStopped() || _magazine == MagazineCapacity) return;
         _reloadTimer.Start();
+        _reloadSound.Play();
         _reloading = true;
     }
 

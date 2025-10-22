@@ -29,6 +29,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     private Globals.GameDirection _lastDirection;
     private int _flashedTimes = 0;
     private Timer _flashTimer;
+    private AudioStreamPlayer2D _hitSound;
     // fields
     public enum CharacterType {
         Neutral, Ally, Enemy
@@ -62,6 +63,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
         Gun = GetNode<Gun>("Gun");
         _flashTimer = GetNode<Timer>("FlashTimer");
         _flashTimer.Timeout += OnFlashTimerTimeout;
+        _hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -74,6 +76,7 @@ public abstract partial class Character : CharacterBody2D, IHittable {
     public void Hit(int damage) {
         Health -= damage;
         if (_flashTimer.IsStopped()) _flashTimer.Start();
+        if (!_hitSound.IsPlaying()) _hitSound.Play();
     }
     
     protected abstract void HandleAnimation();

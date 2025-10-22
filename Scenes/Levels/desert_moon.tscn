@@ -1092,8 +1092,7 @@ sources/0 = SubResource("TileSetAtlasSource_7kpfv")
 [node name="DesertMoon" instance=ExtResource("1_oqg8r")]
 
 [node name="Player" parent="Controller" index="0"]
-position = Vector2(-386, 591)
-JumpForce = 600
+position = Vector2(-377, 591)
 Type = 1
 Speed = 500
 
@@ -1103,7 +1102,7 @@ position = Vector2(-1166.75, 887)
 [node name="Enemies" type="Node" parent="." index="5"]
 
 [node name="MiniMech" parent="Enemies" index="0" instance=ExtResource("4_7kpfv")]
-position = Vector2(539, 390)
+position = Vector2(520, 390)
 Speed = 0
 
 [node name="MiniMech3" parent="Enemies" index="1" instance=ExtResource("4_7kpfv")]

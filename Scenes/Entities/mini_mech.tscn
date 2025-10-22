@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b00h7mfjbbg6u"]
+[gd_scene load_steps=15 format=3 uid="uid://b00h7mfjbbg6u"]
 
 [ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_wyqqp"]
 [ext_resource type="Script" uid="uid://8a326ixdnqy4" path="res://Scripts/Entities/MiniMech.cs" id="2_0mdo6"]
 [ext_resource type="Texture2D" uid="uid://b0igynpb6tmpq" path="res://Assets/Sprites/Enemies/enemies-16col-sheet-alpha.png" id="2_yjfvd"]
+[ext_resource type="AudioStream" uid="uid://dx6gf84ix5suh" path="res://Assets/Audio/SFX/Space/laser9.mp3" id="4_0mdo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5ux2"]
 size = Vector2(25.75, 25)
@@ -89,10 +90,12 @@ sprite_frames = SubResource("SpriteFrames_yjfvd")
 frame_progress = 0.575865
 
 [node name="ShootTimer" type="Timer" parent="." index="3"]
+wait_time = 0.5
 autostart = true
 
 [node name="Gun" parent="." index="4"]
+ShootSoundEffect = ExtResource("4_0mdo6")
 ReloadTime = 0.1
-Cooldown = 0.1
+Cooldown = 0.05
 Target = 1
 BulletSpawnDistance = 30

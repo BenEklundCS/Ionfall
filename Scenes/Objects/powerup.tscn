@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4y87hduqooed"]
+[gd_scene load_steps=6 format=3 uid="uid://b4y87hduqooed"]
 
 [ext_resource type="Script" uid="uid://ci4yaia07gptm" path="res://Scripts/Objects/Powerup.cs" id="1_emoe2"]
 [ext_resource type="Texture2D" uid="uid://ddcf2abowhct0" path="res://Assets/Sprites/Powerups/extralife.png" id="2_cyhxm"]
+[ext_resource type="AudioStream" uid="uid://dkbs65re64ryn" path="res://Assets/Audio/SFX/Space/powerUp7.mp3" id="3_livb8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsj8s"]
 
@@ -21,3 +22,7 @@ shape = SubResource("RectangleShape2D_fsj8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cyhxm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_livb8")
+volume_db = 20.0

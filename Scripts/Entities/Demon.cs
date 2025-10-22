@@ -20,7 +20,7 @@ public partial class Demon : Enemy {
     }
     
     private void OnShootTimerTimeout() {
-        if (InPlayerRange()) {
+        if (InPlayerRange() && PlayerLineOfSight()) {
             Gun.Shoot(DirectionToTrackedPlayer());
         }
     }

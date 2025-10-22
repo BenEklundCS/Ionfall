@@ -18,6 +18,7 @@ public partial class Level : Node2D {
 	private Player _playerFactory = new ();
 	private Powerup _powerupFactory = new ();
 	private Timer _respawnTimer;
+	private AudioStreamPlayer _soundtrack;
 	private Vector2 _respawnPosition = Vector2.Zero;
 	
 	public override void _EnterTree() {
@@ -28,6 +29,10 @@ public partial class Level : Node2D {
 	public override void _Ready() {
 		_controller = GetNode<Controller>("Controller");
 		_player = GetNode<Player>("Controller/Player");
+		_soundtrack = GetNode<AudioStreamPlayer>("GameSoundtrack");
+		_soundtrack.Finished += () => {
+			_soundtrack.Play();
+		};
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 		_respawnTimer.Timeout += OnRespawnTimerTimeout;
 	}

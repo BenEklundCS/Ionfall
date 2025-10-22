@@ -19,7 +19,7 @@ public partial class Powerup : CharacterBody2D, ISpawnable {
         { PowerupType.Health, "res://Assets/Sprites/Powerups/extralife.png" },
         { PowerupType.Ammo, "res://Assets/Sprites/Powerups/tripleshot.png"}
     };
-
+    
     private PowerupType _typeBacking = PowerupType.Health;
     private PowerupType Type {
         get => _typeBacking;
@@ -28,15 +28,19 @@ public partial class Powerup : CharacterBody2D, ISpawnable {
             _sprite.Texture = Load<Texture2D>(_powerupSprites[Type]);
         }
     }
-    
+
+    private AudioStreamPlayer2D _applyEffectSound;
     private Area2D _area;
     private Sprite2D _sprite;
+    private CollisionShape2D _collisionShape;
 
     public override void _Ready() {
         AddToGroup("Powerups");
+        _applyEffectSound = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         _area = GetNode<Area2D>("Area2D");
         _area.BodyEntered += OnBodyEntered;
         _sprite = GetNode<Sprite2D>("Sprite2D");
+        _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         Type = GetRandomPowerupType();
     }
 
@@ -50,6 +54,13 @@ public partial class Powerup : CharacterBody2D, ISpawnable {
     }
     
     private void ApplyEffect(Player player) {
+        Callable.From(() => {
+            _sprite.Visible = false;
+            _collisionShape.Disabled = true;
+        }).CallDeferred();
+            
+        _applyEffectSound.Play();
+        
         switch (_typeBacking) {
             case PowerupType.Health:
                 player.Health += 10;
@@ -57,8 +68,11 @@ public partial class Powerup : CharacterBody2D, ISpawnable {
             case PowerupType.Ammo:
                 player.RefillAmmo();
                 break;
+            default:
+                break;
         }
-        QueueFree();
+        
+        _applyEffectSound.Finished += QueueFree;
     }
 
     private static PowerupType GetRandomPowerupType() {

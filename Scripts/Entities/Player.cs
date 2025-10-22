@@ -14,7 +14,7 @@ using System;
 public partial class Player : Ally, IControllable, ISpawnable {
 	
 	// exports
-	[Export] public int JumpForce = 500;
+	[Export] public int JumpForce = 600;
 	
 	// components
 	private AnimatedSprite2D _sprite;

@@ -13,3 +13,5 @@ sprite_frames = SubResource("SpriteFrames_mqged")
 wait_time = 0.1
 
 [node name="Gun" parent="." instance=ExtResource("1_mqged")]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
