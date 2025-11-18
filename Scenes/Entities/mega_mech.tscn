@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://pknus804tqp5"]
+[gd_scene load_steps=13 format=3 uid="uid://pknus804tqp5"]
 
 [ext_resource type="PackedScene" uid="uid://h2k1x051u55u" path="res://Scenes/Entities/enemy.tscn" id="1_njmuc"]
 [ext_resource type="Script" uid="uid://drsrq1lr3jjbv" path="res://Scripts/Entities/MegaMech.cs" id="2_ekml0"]
 [ext_resource type="Texture2D" uid="uid://bs7exxg6xocx" path="res://Assets/Sprites/Enemies/enemies2-sheet-alpha-nosize.png" id="2_n4gbc"]
+[ext_resource type="AudioStream" uid="uid://bjicu1fxmmooy" path="res://Assets/Audio/SFX/Space/laser3.mp3" id="4_cerh0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekml0"]
 atlas = ExtResource("2_n4gbc")
@@ -71,6 +72,7 @@ frame_progress = 0.369075
 
 [node name="Gun" parent="." index="2"]
 BulletName = "green"
+ShootSoundEffect = ExtResource("4_cerh0")
 ReloadTime = 0.1
 Cooldown = 0.1
 Target = 1

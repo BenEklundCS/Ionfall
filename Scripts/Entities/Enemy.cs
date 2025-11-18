@@ -55,8 +55,11 @@ public abstract partial class Enemy : Character {
 
     protected Vector2 DirectionToTrackedPlayer() {
         var randomOffsetVector = new Vector2(0, (float)(Globals.Random.NextDouble() * 2.0 - 1.0) * Accuracy);
-        var position = TrackedPlayer.GlobalPosition + randomOffsetVector;
-        return GlobalPosition.DirectionTo(position).Normalized();
+        var position = TrackedPlayer?.GlobalPosition + randomOffsetVector;
+        if (position.HasValue) {
+            return GlobalPosition.DirectionTo(position.Value).Normalized();
+        }
+        return Vector2.Zero;
     }
 
     protected void MoveToPlayer() {

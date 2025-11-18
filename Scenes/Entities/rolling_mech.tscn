@@ -132,7 +132,6 @@ BulletName = "red"
 ReloadTime = 0.1
 Cooldown = 1.0
 Target = 1
-BulletSpawnOffset = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(2, 0)
